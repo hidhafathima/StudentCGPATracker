@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Student CGPA Tracker</title>
+    </head>
+
+    <body>
+        <h1> Student CGPA Tracker</h1>
+
+        <form method="POST">
+
+            <label>Student Name:</label>
+            <input type="text" name="student_name">
+
+            <br><br>
+
+            <label>CGPA:</label>
+            <input type="number" name="cgpa">
+
+             <br><br>
+
+             <button type="submit">Save</button>
+
+        </form>
+
+        <hr>
+
+            <h2>Saved Students</h2>
+            <ul>
+                {% for student in students %}
+
+                <li>
+                    Name:{{ student[1]}} | CGPA: {{ student[2]}}
+                </li>
+
+                {% endfor %}
+            </ul>
+       
+    </body>
+</html>
