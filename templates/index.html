@@ -19,6 +19,11 @@
 
              <br><br>
 
+             <label>Branch:</label>
+             <input type="text" name="branch">
+
+             <br><br>
+
              <button type="submit">Save</button>
 
         </form>
@@ -30,7 +35,7 @@
                 {% for student in students %}
 
                 <li>
-                    Name:{{ student[1]}} | CGPA: {{ student[2]}}
+                    Name:{{ student[1]}} | Branch: {{ student[2]}} | CGPA:{{student[3]}}
                 </li>
 
                 {% endfor %}

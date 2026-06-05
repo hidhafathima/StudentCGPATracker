@@ -10,6 +10,7 @@ cursor.execute("""
 CREATE  TABLE IF NOT EXISTS STUDENTS(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
+    branch TEXT,
     cgpa REAL
 )
 """)
@@ -21,37 +22,38 @@ conn.close()
 @app.route("/",methods=["GET","POST"])
 def home():
     
-    
+     
      if request.method=="POST":
           
-
+          print("POST REQUEST RECIEVED")
           student_name=request.form["student_name"]
+          branch=request.form["branch"]
           cgpa=request.form["cgpa"]
 
-          
+         
 
           conn=sqlite3.connect("students.db")
           cursor=conn.cursor()
 
           cursor.execute(
-               "INSERT INTO students(name,cgpa) VALUES(?,?)",
-               (student_name,cgpa)
+               "INSERT INTO students(name,branch,cgpa) VALUES(?,?,?)",
+               (student_name,branch,cgpa)
           )
-          print("Saving:",student_name,cgpa)
+          
           conn.commit()
           conn.close()
 
-          print("Saved to database")
-          conn=sqlite3.connect("students.db")
-          cursor=conn.cursor()
+          
+     conn=sqlite3.connect("students.db")
+     cursor=conn.cursor()
 
-          cursor.execute("SELECT * FROM students")
-          students=cursor.fetchall()
-          print("Students from database:",students)
+     cursor.execute("SELECT * FROM students")
+     students=cursor.fetchall()
 
-          conn.close()
+     conn.close()
               
 
      return render_template("index.html",students=students)
+    
 if __name__=="__main__":
     app.run(debug=True)
